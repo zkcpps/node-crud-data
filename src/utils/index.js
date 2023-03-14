@@ -72,11 +72,10 @@ function deleteData(name, data) {
   let dataBase = eval(dataArr[1]);
 
   // 更改数据源
-  const index = dataBase.findIndex((item) => item.id === data);
-  delete dataBase[index];
-  dataBase = dataBase.filter(Boolean);
+  dataBase = dataBase.filter((item) => item.id !== data);
 
   const result = dataArr[0] + "=" + JSON.stringify(dataBase);
+
   try {
     fs.writeFileSync(dataPath, result);
     console.info("删除数据---[", data, "]---成功");
